@@ -1,25 +1,37 @@
 import logo from './logo.svg';
 import './App.css';
+import { Component } from 'react';
+import { Header } from './components/header';
+import { Footer } from './components/footer';
+import { Content } from './components/content';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Navbar, Nav } from 'react-bootstrap';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component { // importing components
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          <Navbar bg="dark" variant="dark">
+            <Navbar.Brand href="#home">App Name</Navbar.Brand>
+            <Nav className="mr-auto">
+              <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href="/read">Read</Nav.Link>
+              <Nav.Link href="/create">Create</Nav.Link>
+            </Nav>
+          </Navbar>
+
+          <br />
+          <Switch>
+            <Route path='/' component={Content} exact /> //setting up routing links to different pages
+              <Route path='/read' component={Footer} exact />
+            <Route path='/create' component={Header} exact />
+          </Switch>
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;
